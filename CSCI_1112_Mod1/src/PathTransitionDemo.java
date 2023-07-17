@@ -1,7 +1,10 @@
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -14,15 +17,23 @@ public class PathTransitionDemo extends Application {
 	public void start(Stage primaryStage) {
 		// Create a pane 
 		Pane pane = new Pane();
+		
+		//creating a button to pause and play
+		Button play = new Button("Play");
+		Button pause = new Button("Pause");
+		pane.getChildren().add(play);
+		pane.getChildren().add(pause);
 
 		// Create a rectangle
 		Rectangle rectangle = new Rectangle (0, 0, 25, 50);
 		rectangle.setFill(Color.ORANGE);
+		rectangle.setStroke(Color.BLACK);
 
 		// Create a circle
 		Circle circle = new Circle(125, 100, 50);
 		circle.setFill(Color.WHITE);
 		circle.setStroke(Color.BLACK);
+		
 
 		// Add circle and rectangle to the pane
 		pane.getChildren().add(circle); 
@@ -36,7 +47,7 @@ public class PathTransitionDemo extends Application {
 		pt.setOrientation(
 				PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
 		pt.setCycleCount(Timeline.INDEFINITE);
-		pt.setAutoReverse(true);
+		pt.setAutoReverse(false);
 		pt.play(); // Start animation 
 
 		circle.setOnMousePressed(e -> pt.pause());
