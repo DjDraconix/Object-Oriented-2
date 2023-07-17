@@ -26,7 +26,7 @@ public class PathTransitionDemo extends Application {
 
 		// Add circle and rectangle to the pane
 		pane.getChildren().add(circle); 
-		pane.getChildren().add(rectangle); 
+		pane.getChildren().add(rectangle);
 
 		// Create a path transition 
 		PathTransition pt = new PathTransition();
