@@ -10,10 +10,10 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class Exercise15_03  extends Application{
-
+	Pane pane;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Pane pane = new Pane();
+		pane = new Pane();
 		HBox buttons = new HBox();
 		buttons.setSpacing(10);
 		buttons.setAlignment(Pos.CENTER);
@@ -26,7 +26,7 @@ public class Exercise15_03  extends Application{
 		buttons.getChildren().addAll(up, down, left, right);
 
 		//the circle
-		Circle ball = new Circle(125, 100, 30);
+		Circle ball = new Circle(150, 150, 30);
 		ball.setFill(Color.WHITE);
 		ball.setStroke(Color.BLACK);
 		pane.getChildren().add(ball);
@@ -36,34 +36,28 @@ public class Exercise15_03  extends Application{
 		borderPane.setCenter(pane);
 		borderPane.setBottom(buttons);
 
-		//adding the transitions
-		int[] position = new int[2];
-		position[0] = 0;
-		position[1] = 0;
-		if (position[1] > -10) {
-			position[1] -= 10;
-			up.setOnMouseClicked(e -> ball.setTranslateY(ball.getTranslateY() - 10));
-		}
-		if (position[1] < 135) {
-			position[1] += 10;
-			down.setOnMouseClicked(e -> ball.setTranslateY(ball.getTranslateY() + 10));
-		}
-		if (position[0] > -135) {
-			position[0] -=10;
-			left.setOnMouseClicked(e -> ball.setTranslateX(ball.getTranslateX() - 10));
-		}
-		if (position[0] < 135) {
-			position[0] +=10;
-			right.setOnMouseClicked(e -> ball.setTranslateX(ball.getTranslateX() + 10));
-		}
-
 		//showing code
 		Scene scene = new Scene(borderPane, 300, 300);
 		primaryStage.setTitle("PathTransitionDemo");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-	}
+		
+		//adding the transitions
+		up.setOnMouseClicked(e -> moveBallInDirection(ball, 0, -10));
+		down.setOnMouseClicked(e -> moveBallInDirection(ball, 0, 10));
+		left.setOnMouseClicked(e -> moveBallInDirection(ball, -10, 0));
+		right.setOnMouseClicked(e -> moveBallInDirection(ball, 10, 0));
 
+	}
+	void moveBallInDirection(Circle ball, int directionX, int directionY) {
+		if (ball.getTranslateX() + directionX < pane.getWidth() / 2.0 && ball.getTranslateX() + directionX > -(pane.getWidth() / 2.0)) {
+			ball.setTranslateX(ball.getTranslateX() + directionX); 
+		}
+		if (ball.getTranslateY() + directionY < pane.getHeight() / 2.0 && ball.getTranslateY() + directionY > -(pane.getHeight() / 2.0)) {
+		ball.setTranslateY(ball.getTranslateY() + directionY);
+		}
+		
+	}
 
 	public static void main(String[] args) {
 		launch(args);
