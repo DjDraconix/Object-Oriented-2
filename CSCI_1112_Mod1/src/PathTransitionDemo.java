@@ -17,10 +17,17 @@ public class PathTransitionDemo extends Application {
 	public void start(Stage primaryStage) {
 		// Create a pane 
 		Pane pane = new Pane();
+		// Create a scene and place it in the stage
+		Scene scene = new Scene(pane, 250, 200);
 		
+		
+		double paneWidth = pane.getWidth();
 		//creating a button to pause and play
 		Button play = new Button("Play");
 		Button pause = new Button("Pause");
+		System.out.println(paneWidth);
+		pause.setTranslateX(paneWidth - 50);
+		
 		pane.getChildren().add(play);
 		pane.getChildren().add(pause);
 
@@ -50,11 +57,10 @@ public class PathTransitionDemo extends Application {
 		pt.setAutoReverse(false);
 		pt.play(); // Start animation 
 
-		circle.setOnMousePressed(e -> pt.pause());
-		circle.setOnMouseReleased(e -> pt.play());
+		pause.setOnMousePressed(e -> pt.pause());
+		play.setOnMousePressed(e -> pt.play());
 
-		// Create a scene and place it in the stage
-		Scene scene = new Scene(pane, 250, 200);
+
 		primaryStage.setTitle("PathTransitionDemo"); // Set the stage title
 		primaryStage.setScene(scene); // Place the scene in the stage
 		primaryStage.show(); // Display the stage
