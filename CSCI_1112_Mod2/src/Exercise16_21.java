@@ -1,4 +1,8 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,12 +14,13 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Exercise16_21 extends Application{
 
-	private static final String URL = 
-			"https://liveexample.pearsoncmg.com/common/audio/anthem/anthem0.mp3\n";
-	
+	private static String URL = 
+			"https://liveexample.pearsoncmg.com/common/audio/anthem/anthem0.mp3";
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// Pane and scene
@@ -39,16 +44,15 @@ public class Exercise16_21 extends Application{
 
 		// Label
 		Label label = new Label();
-		label.setTranslateX(125);
+		label.setTranslateX(145);
 		label.setTranslateY(90);
 		label.setFont(Font.font(30));
 
 		pane.getChildren().add(label);
-		
+
 		// Media
 		Media media = new Media(URL);
 		MediaPlayer alarm = new MediaPlayer(media);
-		MediaView movie = new MediaView(alarm);
 
 		// Printing the scene
 		primaryStage.setTitle("Exercise16_21");
@@ -59,14 +63,31 @@ public class Exercise16_21 extends Application{
 	}
 
 	public void countdown(TextField userIn, Label label, MediaPlayer alarm) {
-		String fromUser = userIn.getText();
-		int numb = Integer.parseInt(fromUser);
-		for (int i = numb; i > 0; i--) {
-			String text = Integer.toString(i);
-			label.setText(text);
-		}
-		label.setText("0");
-		alarm.play();
+		// Event Handeler to change number
+		label.setText(userIn.getText());
+		EventHandler<ActionEvent> eventHandler = e -> {
+			if (label.getText().equals(userIn.getText())) {
+				String fromUser = userIn.getText();
+				int numb = Integer.parseInt(fromUser);
+				String text = Integer.toString(numb - 1);
+				label.setText(text);
+			} else if (!label.getText().equals("0")) {
+				String fromUser = label.getText();
+				System.out.println(fromUser);
+				int numb = Integer.parseInt(fromUser);
+				String text = Integer.toString(numb - 1);
+				label.setText(text);
+			}
+			if (label.getText().equals("0")) {
+				alarm.play();
+			}
+		};
+
+		// Timeline
+		Timeline animation = new Timeline(
+				new KeyFrame(Duration.millis(1000), eventHandler));
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.play();
 		
 	}
 
