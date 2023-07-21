@@ -18,7 +18,7 @@ public class Exercise17_01 {
 		for (int i = 0; i < 100; i++) {
 			fileOut.print(numbers[i] + " ");
 		}
-
+		
 		fileOut.close();
 
 	}
