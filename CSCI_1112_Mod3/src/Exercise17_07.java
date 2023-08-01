@@ -1,3 +1,4 @@
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 
 public class Exercise17_07 {
 
-	public static void main(String[] args) throws ClassNotFoundException {
+	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		
 		Loan loan1 = new Loan();
         Loan loan2 = new Loan(1.8, 10, 10000);
@@ -36,25 +37,25 @@ public class Exercise17_07 {
 
 	}
 	
-	private static void outputData(File data) throws FileNotFoundException, ClassNotFoundException {
-		try {
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream("Exercise17_07.dat"));
-			Scanner file = new Scanner(data);
-			
-			while(file.hasNext()) {
+	private static void outputData(File data) throws ClassNotFoundException, IOException {
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream("Exercise17_07.dat"));
+		Scanner file = new Scanner(data);
+		try {		
+			while(true) {
 				Loan loan = (Loan) in.readObject();
 				System.out.println(loan.getLoanAmount());
 			}
 			
+		}catch(EOFException ex) {
 			file.close();
 			in.close();
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		}
+		catch (FileNotFoundException e) {
 			System.out.println("Did not work part 1");
-		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
 			System.out.println("Did not work part 2");
+			e.printStackTrace();
 		}
 	}
 
