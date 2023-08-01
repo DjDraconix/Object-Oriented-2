@@ -1,7 +1,11 @@
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Scanner;
 
 public class Exercise17_07 {
 
@@ -23,12 +27,23 @@ public class Exercise17_07 {
         }
         
         File data = new File("Exercise17_07.dat");
-        outputData(data);
+        try {
+			outputData(data);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
 	}
 	
-	private static void outputData(File data) {
-		
+	private static void outputData(File data) throws FileNotFoundException {
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream("Exercise17_07.dat"));
+			while(in.)
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
