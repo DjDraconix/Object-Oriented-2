@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Exercise17_07 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 		
 		Loan loan1 = new Loan();
         Loan loan2 = new Loan(1.8, 10, 10000);
@@ -20,6 +20,7 @@ public class Exercise17_07 {
             output.writeObject(loan2);
             
             output.close();
+            
         }
         catch (IOException ex) {
             System.out.println("File could not be opened");
@@ -35,14 +36,25 @@ public class Exercise17_07 {
 
 	}
 	
-	private static void outputData(File data) throws FileNotFoundException {
+	private static void outputData(File data) throws FileNotFoundException, ClassNotFoundException {
 		try {
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream("Exercise17_07.dat"));
-			while(in.)
+			Scanner file = new Scanner(data);
+			
+			while(file.hasNext()) {
+				Loan loan = (Loan) in.readObject();
+				System.out.println(loan.getLoanAmount());
+			}
+			
+			file.close();
+			in.close();
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			System.out.println("Did not work part 1");
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("Did not work part 2");
 		}
 	}
 
