@@ -1,4 +1,5 @@
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -22,16 +23,19 @@ public class Exercise17_Encryption {
 	
 	public static void Exercise17_14() throws IOException {
 		Scanner in = new Scanner(System.in);
+		File forScanner;
 		System.out.println("Please enter the name of a file to pull from to encrypt"
 				+ "\nFor pre made file enter File");
 		String fileName = in.next();
 		FileInputStream inFile;
 		if (fileName.equals("File")) {
 			inFile = new FileInputStream("Exercise17_14.dat");
+			forScanner = new File("Exercise17_14.dat");
 		} else {
 			inFile = new FileInputStream(fileName + ".dat");
+			forScanner = new File(fileName + ".dat");
 		}
-		
+		Scanner file = new Scanner(forScanner);
 		System.out.println("Please enter the name of a file to push the encryption to"
 				+ "\nFor pre made file enter File");
 
@@ -44,13 +48,16 @@ public class Exercise17_Encryption {
 		}
 		
 		try{
-			while (true) {
-				int encrypt = inFile.read();
-				encrypt += 5;
-				outFile.write(encrypt);
+			byte[] encrypt = inFile.readAllBytes();
+			int i = 0;
+			while (file.hasNextByte()) {
+				encrypt[i] += 5;
+				outFile.write(encrypt[i]);
+				i++;
 			}
 		}
 		catch(EOFException ex) {
+			file.close();
 			outFile.close();
 			inFile.close();
 			in.close();
@@ -68,15 +75,19 @@ public class Exercise17_Encryption {
 
 	public static void Exercise17_15() throws IOException {
 		Scanner in = new Scanner(System.in);
+		File forScanner;
 		System.out.println("Please enter the name of a file to pull from to decryptcrypt"
 				+ "\nFor pre made file enter File");
 		String fileName = in.next();
 		FileInputStream inFile;
 		if (fileName.equals("File")) {
 			inFile = new FileInputStream("Exercise17_14enc.dat");
+			forScanner = new File("Exercise17_14enc.dat");
 		} else {
 			inFile = new FileInputStream(fileName + ".dat");
+			forScanner = new File(fileName + ".dat");
 		}
+		Scanner file = new Scanner(forScanner);
 		
 		System.out.println("Please enter the name of a file to push the decryption to"
 				+ "\nFor pre made file enter File");
@@ -89,13 +100,16 @@ public class Exercise17_Encryption {
 		}
 		
 		try{
-			while (true) {
-				int decrypt = inFile.read();
-				decrypt -= 5;
-				outFile.write(decrypt);
+			byte[] encrypt = inFile.readAllBytes();
+			int i = 0;
+			while (file.hasNextByte()) {
+				encrypt[i] += 5;
+				outFile.write(encrypt[i]);
+				i++;
 			}
 		}
 		catch(EOFException ex) {
+			file.close();
 			outFile.close();
 			inFile.close();
 			in.close();
