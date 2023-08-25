@@ -12,7 +12,6 @@ public class Module {
 		Cover = new Image(book + ".gif");
 		Explanation = new File(book + ".txt");
 	}
-	
 
 	@SuppressWarnings("unused")
 	private static File getExplination() {
