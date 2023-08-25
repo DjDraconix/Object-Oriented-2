@@ -1,18 +1,36 @@
 import java.util.ArrayList;
-
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class DnD_Module_Selector extends Application{
 
 	public void start(Stage primaryStage) throws Exception {
+		// Pane
+		Pane pane = new Pane();
+		Scene scene = new Scene(pane, 400, 300);
+		
+		//Level combo box
+		ComboBox<String> level = new ComboBox<>();
+		level.getItems().addAll("Player Level", "Compleatly New", "Newer Player",
+				"Well Played", "Above Average", "Seasoned Players");
+		level.setValue("Player Level");
+		
+		//length combo box
+		ComboBox<String> length = new ComboBox<>();
+		length.getItems().addAll("Campaign Length", "1-3 Sessions", "4-8 Sessions",
+				"9-15 Sessions", "16-24 Sessions", "24-32+ Sessions");
+		level.setValue("Campaign Length");
+		
 		
 	}
 
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+
 	@SuppressWarnings("unused")
 	private static ArrayList<Module> makeModules() {
 		//Website used
