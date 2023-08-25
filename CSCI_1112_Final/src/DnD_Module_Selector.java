@@ -8,30 +8,43 @@ import javafx.stage.Stage;
 public class DnD_Module_Selector extends Application{
 
 	public void start(Stage primaryStage) throws Exception {
+		ArrayList<Module> modules = makeModules();
+		
+		int playerLevel = 0;
+		int playTime = 0;
+		
 		// Pane
 		Pane pane = new Pane();
 		Scene scene = new Scene(pane, 400, 300);
-		
+
 		//Level combo box
 		ComboBox<String> level = new ComboBox<>();
-		level.getItems().addAll("Player Level", "Compleatly New", "Newer Player",
+		level.getItems().addAll("Compleatly New", "Newer Player",
 				"Well Played", "Above Average", "Seasoned Players");
 		level.setValue("Player Level");
-		
+		level.setTranslateX(5);
+		level.setTranslateY(5);
+		pane.getChildren().add(level);
+
 		//length combo box
 		ComboBox<String> length = new ComboBox<>();
-		length.getItems().addAll("Campaign Length", "1-3 Sessions", "4-8 Sessions",
+		length.getItems().addAll("1-3 Sessions", "4-8 Sessions",
 				"9-15 Sessions", "16-24 Sessions", "24-32+ Sessions");
-		level.setValue("Campaign Length");
-		
-		
+		length.setValue("Campaign Length");
+		length.setTranslateX(pane.getWidth() - 150);
+		length.setTranslateY(5);
+		pane.getChildren().add(length);
+
+		// Printing the scene
+		primaryStage.setTitle("Module Selector");
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
-	@SuppressWarnings("unused")
 	private static ArrayList<Module> makeModules() {
 		//Website used
 		//https://www.thegamer.com/dungeons-dragons-5e-modules-best-ranked/#descent-into-avernus
@@ -76,6 +89,7 @@ public class DnD_Module_Selector extends Application{
 		Modules.add(mod);
 		mod = new Module("A Curriculum of Chaos", 3, 3);
 		Modules.add(mod);
+		
 		return Modules;
 	}
 }

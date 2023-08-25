@@ -23,28 +23,23 @@ public class Module {
 		Level = experiance;
 	}
 
-	@SuppressWarnings("unused")
-	private static File getExplination() {
+	File getExplination() {
 		return Explanation;
 	}
 	
-	@SuppressWarnings("unused")
-	private static Image getImage() {
+	Image getImage() {
 		return Cover;
 	}
 	
-	@SuppressWarnings("unused")
-	private static String getName() {
+	String getName() {
 		return Name;
 	}
 	
-	@SuppressWarnings("unused")
-	private static int getLength() {
+	int getLength() {
 		return Length;
 	}
 	
-	@SuppressWarnings("unused")
-	private static int getLevel() {
+	int getLevel() {
 		return Level;
 	}
 	
