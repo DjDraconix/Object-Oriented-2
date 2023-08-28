@@ -12,12 +12,13 @@ public class Module {
 	//5- a years worth of sessions
 	static int Level;
 	//1- new players
+	//2- base level knowledge
 	//3- players no how to play decently
-	//5- players are seasoned and know most of the rules
+	//4- players are seasoned and know most of the rules
 	
 	public Module(String book, int time, int experiance){
 		Name = book;
-		Cover = new Image(book + ".gif");
+		Cover = new Image("file:///Users/student/Desktop/Object-Oriented-2/CSCI_1112_Final/D&D%20Images/" + book + ".gif");
 		Explanation = new File(book + ".txt");
 		Length = time;
 		Level = experiance;
