@@ -11,6 +11,54 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class DnD_Module_Selector extends Application{
+	
+	private static Module[] makeModules() {
+		//Website used
+		//https://www.thegamer.com/dungeons-dragons-5e-modules-best-ranked/#descent-into-avernus
+		Module[] Modules = new Module[20];
+		
+		Modules[0] = (new Module("Curse of Strahd", 5, 4));
+		
+		Modules[1] = (new Module("Tales from the Yawning Portal", 1, 4));
+		
+		Modules[2] = (new Module("Keys from the Golden Valut", 4, 2));
+		
+		Modules[3] = (new Module("Tomb of Annihilation", 5, 2));
+		
+		Modules[4] = (new Module("Lost Mines of Phandelver", 2, 1));
+		
+		Modules[5] = (new Module("Out of the Abyss", 5, 1));
+		
+		Modules[6] = (new Module("Descent Into Avernus", 4, 3));
+		
+		Modules[7] = (new Module("Ghosts of Saltmarsh", 3, 1));
+		
+		Modules[8] = (new Module("The Wild Beyond the Witchlight", 3, 4));
+		
+		Modules[9] = (new Module("Rime of the Frostmaiden", 4 ,4));
+		
+		Modules[10] = (new Module("Dragon of Icepire Peak", 1, 2));
+		
+		Modules[11] = (new Module("Shadow of the Dragon Queen", 5, 3));
+		
+		Modules[12] = (new Module("Dungeon of the Mad Mage", 2, 2));
+		
+		Modules[13] = (new Module("Princes of the Apocalypse", 2, 3));
+		
+		Modules[14] = (new Module("Dragon Heist", 2, 4));
+		
+		Modules[15] = (new Module("Storm King's Thunder", 3, 2));
+		
+		Modules[16] = (new Module("Call of the Netherdeep", 3, 3));
+		
+		Modules[17] = (new Module("Candelkeep Mysteries", 1, 3));
+		
+		Modules[18] = (new Module("Dragons of Stormwreck Isle", 1, 1));
+		
+		Modules[19] = new Module("A Curriculum of Chaos", 4, 1);
+
+		return Modules;
+	}
 
 	public void start(Stage primaryStage) throws Exception {
 		Module toUser = new Module("blank", 0, 0);
@@ -73,19 +121,17 @@ public class DnD_Module_Selector extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-		go.setOnMouseClicked(e -> Checkboxes(level, length, playerLevel, playTime, toUser));
+		go.setOnMouseClicked(e -> Checkboxes(level, length, playerLevel, playTime, cover));
 	}
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
-	private static void Checkboxes(ComboBox<String> level, ComboBox<String> length, int PlayerLevel, int PlayTime, Module toPlayer) {
-		ArrayList<Module> modules = makeModules();
-		System.out.println(toPlayer.getName());
+	private static void Checkboxes(ComboBox<String> level, ComboBox<String> length, int PlayerLevel, int PlayTime, Image Cover) {
+		Module[] Modules = makeModules();
 		if(level.getValue().contains("1")) {
 			PlayerLevel = 1;
-			System.out.println("Yes");
 		}
 		if(level.getValue().contains("2")) {
 			PlayerLevel = 2;
@@ -98,7 +144,6 @@ public class DnD_Module_Selector extends Application{
 		}
 		if(length.getValue().contains("1-")) {
 			PlayTime = 1;
-			System.out.println("No");
 		}
 		if(length.getValue().contains("4-")) {
 			PlayTime = 2;
@@ -112,61 +157,11 @@ public class DnD_Module_Selector extends Application{
 		if(length.getValue().contains("24-")) {
 			PlayTime = 5;
 		}
-		for (int i = 0; i < modules.size() - 1; i++) {
-			System.out.println(modules.get(i).getLevel());
-			if(modules.get(i).getLevel() == PlayerLevel && modules.get(i).getLength() == PlayTime) {
-				toPlayer = modules.get(i);
-				System.out.println(PlayerLevel);
-				System.out.println(PlayTime);
+
+		for (int i = 0; i < Modules.length; i++) {
+			if(Modules[i].getLevel() == PlayerLevel && Modules[i].getLength() == PlayTime) {
+				Cover = Modules[i].getImage();
 			}
 		}
-	}
-	
-	private static ArrayList<Module> makeModules() {
-		//Website used
-		//https://www.thegamer.com/dungeons-dragons-5e-modules-best-ranked/#descent-into-avernus
-		ArrayList<Module> Modules = new ArrayList<Module>();
-		Module mod = new Module("Curse of Strahd", 5, 4);
-		Modules.add(mod);
-		mod = new Module("Tales from the Yawning Portal", 1, 4);
-		Modules.add(mod);
-		mod = new Module("Keys from the Golden Valut", 4, 2);
-		Modules.add(mod);
-		mod = new Module("Tomb of Annihilation", 5, 2);
-		Modules.add(mod);
-		mod = new Module("Lost Mines of Phandelver", 2, 1);
-		Modules.add(mod);
-		mod = new Module("Out of the Abyss", 5, 1);
-		Modules.add(mod);
-		mod = new Module("Descent Into Avernus", 4, 3);
-		Modules.add(mod);
-		mod = new Module("Ghosts of Saltmarsh", 3, 1);
-		Modules.add(mod);
-		mod = new Module("The Wild Beyond the Witchlight", 3, 4);
-		Modules.add(mod);
-		mod = new Module("Rime of the Frostmaiden", 4 ,4);
-		Modules.add(mod);
-		mod = new Module("Dragon of Icepire Peak", 1, 2);
-		Modules.add(mod);
-		mod = new Module("Shadow of the Dragon Queen", 5, 3);
-		Modules.add(mod);
-		mod = new Module("Dungeon of the Mad Mage", 2, 2);
-		Modules.add(mod);
-		mod = new Module("Princes of the Apocalypse", 2, 3);
-		Modules.add(mod);
-		mod = new Module("Dragon Heist", 2, 4);
-		Modules.add(mod);
-		mod = new Module("Storm King's Thunder", 3, 2);
-		Modules.add(mod);
-		mod = new Module("Call of the Netherdeep", 3, 3);
-		Modules.add(mod);
-		mod = new Module("Candelkeep Mysteries", 1, 3);
-		Modules.add(mod);
-		mod = new Module("Dragons of Stormwreck Isle", 1, 1);
-		Modules.add(mod);
-		mod = new Module("A Curriculum of Chaos", 4, 1);
-		Modules.add(mod);
-		
-		return Modules;
 	}
 }

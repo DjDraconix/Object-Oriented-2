@@ -17,11 +17,11 @@ public class Module {
 	//4- players are seasoned and know most of the rules
 	
 	public Module(String book, int time, int experiance){
-		Name = book;
+		this.Name = book;
 		Cover = new Image("file:///Users/student/Desktop/Object-Oriented-2/CSCI_1112_Final/D&D%20Images/" + book + ".gif");
 		Explanation = new File("file:///Users/student/Desktop/Object-Oriented-2/CSCI_1112_Final/D&D%20Files/" + book + ".txt");
-		Length = time;
-		Level = experiance;
+		this.Length = time;
+		this.Level = experiance;
 	}
 
 	File getExplination() {
