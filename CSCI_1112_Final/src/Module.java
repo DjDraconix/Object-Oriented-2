@@ -19,7 +19,7 @@ public class Module {
 	public Module(String book, int time, int experiance){
 		Name = book;
 		Cover = new Image("file:///Users/student/Desktop/Object-Oriented-2/CSCI_1112_Final/D&D%20Images/" + book + ".gif");
-		Explanation = new File(book + ".txt");
+		Explanation = new File("file:///Users/student/Desktop/Object-Oriented-2/CSCI_1112_Final/D&D%20Files/" + book + ".txt");
 		Length = time;
 		Level = experiance;
 	}
