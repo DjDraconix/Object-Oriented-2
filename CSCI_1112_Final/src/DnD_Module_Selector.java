@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -8,8 +9,7 @@ import javafx.stage.Stage;
 public class DnD_Module_Selector extends Application{
 
 	public void start(Stage primaryStage) throws Exception {
-		ArrayList<Module> modules = makeModules();
-		
+		Module toUser;
 		int playerLevel = 0;
 		int playTime = 0;
 		
@@ -31,9 +31,15 @@ public class DnD_Module_Selector extends Application{
 		length.getItems().addAll("1-3 Sessions", "4-8 Sessions",
 				"9-15 Sessions", "16-24 Sessions", "24-32+ Sessions");
 		length.setValue("Campaign Length");
-		length.setTranslateX(pane.getWidth() - 150);
+		length.setTranslateX(level.getWidth() + 180);
 		length.setTranslateY(5);
 		pane.getChildren().add(length);
+		
+		// Button to confirm changes
+		Button go = new Button("Go");
+		go.setTranslateX(350);
+		go.setTranslateY(5);
+		pane.getChildren().add(go);
 
 		// Printing the scene
 		primaryStage.setTitle("Module Selector");
@@ -45,7 +51,10 @@ public class DnD_Module_Selector extends Application{
 		launch(args);
 	}
 
-	@SuppressWarnings("unused")
+	private static void Checkboxes(ComboBox level, ComboBox length, int PlayerLevel, int PlayTime, Module toPlaer) {
+		ArrayList<Module> modules = makeModules();
+	}
+	
 	private static ArrayList<Module> makeModules() {
 		//Website used
 		//https://www.thegamer.com/dungeons-dragons-5e-modules-best-ranked/#descent-into-avernus
