@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Scanner;
+
+import javax.swing.JTextArea;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -87,11 +90,16 @@ public class DnD_Module_Selector extends Application{
 		String toLabel = "";
 		toLabel = toLabel + file.readLine() + "\n";
 		toLabel = toLabel + file.readLine();
-		
 		Label Text = new Label(toLabel);
-		Text.setMaxSize(175, 240);
 		Text.setTranslateX(195);
 		Text.setTranslateY(40);
+
+		// JTextArea
+		JTextArea theLabel = new JTextArea();
+		theLabel.setText(toLabel);
+		theLabel.setLineWrap(true);
+		theLabel.setWrapStyleWord(true);
+		theLabel.setSize(175, 240);
 		pane.getChildren().add(Text);
 
 		//Level combo box
