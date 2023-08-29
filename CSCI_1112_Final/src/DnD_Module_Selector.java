@@ -13,38 +13,38 @@ import javafx.stage.Stage;
 
 public class DnD_Module_Selector extends Application{
 	Module Printed;
-	private static Module[] makeModules() throws FileNotFoundException {
-		
+	
+	private static Module[] makeModules() throws FileNotFoundException {	
 		//https://www.thegamer.com/dungeons-dragons-5e-modules-best-ranked/#descent-into-avernus
 		Module[] Modules = new Module[20];
 
-		Modules[0] = (new Module("Curse of Strahd", 5, 4));
+		Modules[0] = new Module("Curse of Strahd", 5, 4);
 
-		Modules[1] = (new Module("Tales from the Yawning Portal", 1, 4));
+		Modules[1] = new Module("Tales from the Yawning Portal", 1, 4);
 
-		Modules[2] = (new Module("Keys from the Golden Valut", 4, 2));
+		Modules[2] = new Module("Keys from the Golden Valut", 4, 2);
 
-		Modules[3] = (new Module("Tomb of Annihilation", 5, 2));
+		Modules[3] = new Module("Tomb of Annihilation", 5, 2);
 
-		Modules[4] = (new Module("Lost Mines of Phandelver", 2, 1));
+		Modules[4] = new Module("Lost Mines of Phandelver", 2, 1);
 
-		Modules[5] = (new Module("Out of the Abyss", 5, 1));
+		Modules[5] = new Module("Out of the Abyss", 5, 1);
 
-		Modules[6] = (new Module("Descent Into Avernus", 4, 3));
+		Modules[6] = new Module("Descent Into Avernus", 4, 3);
 
-		Modules[7] = (new Module("Ghosts of Saltmarsh", 3, 1));
+		Modules[7] = new Module("Ghosts of Saltmarsh", 3, 1);
 
-		Modules[8] = (new Module("The Wild Beyond the Witchlight", 3, 4));
+		Modules[8] = new Module("The Wild Beyond the Witchlight", 3, 4);
 
-		Modules[9] = (new Module("Rime of the Frostmaiden", 4 ,4));
+		Modules[9] = new Module("Rime of the Frostmaiden", 4 ,4);
 
-		Modules[10] = (new Module("Dragon of Icepire Peak", 1, 2));
+		Modules[10] = new Module("Dragon of Icepire Peak", 1, 2);
 
-		Modules[11] = (new Module("Shadow of the Dragon Queen", 5, 3));
+		Modules[11] = new Module("Shadow of the Dragon Queen", 5, 3);
 
-		Modules[12] = (new Module("Dungeon of the Mad Mage", 2, 2));
+		Modules[12] = new Module("Dungeon of the Mad Mage", 2, 2);
 
-		Modules[13] = (new Module("Princes of the Apocalypse", 2, 3));
+		Modules[13] = new Module("Princes of the Apocalypse", 2, 3);
 
 		Modules[14] = (new Module("Dragon Heist", 2, 4));
 
@@ -119,7 +119,7 @@ public class DnD_Module_Selector extends Application{
 
 		go.setOnMouseClicked(e -> {
 			try {
-				Printed = Checkboxes(level, length);
+				Printed = moduleSelect(level, length);
 				
 		        Image newCover = Printed.getImage();
 		        fullCover.setImage(newCover);
@@ -138,7 +138,7 @@ public class DnD_Module_Selector extends Application{
 		launch(args);
 	}
 
-	private static Module Checkboxes(ComboBox<String> level, ComboBox<String> length) throws FileNotFoundException {
+	private static Module moduleSelect(ComboBox<String> level, ComboBox<String> length) throws FileNotFoundException {
 		Module[] Modules = makeModules();
 		Module UserChoice = new Module();
 		

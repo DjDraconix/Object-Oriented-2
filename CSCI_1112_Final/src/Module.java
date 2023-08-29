@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
 import javafx.scene.image.Image;
@@ -17,12 +19,14 @@ public class Module {
 	//4- players are seasoned and know most of the rules
 	
 	public Module() {
-		
+		Name = "Null book";
 	}
 	
 	public Module(String book, int time, int experiance) throws FileNotFoundException{
 		Name = book;
-		Cover = new Image("file:///Users/student/Desktop/Object-Oriented-2/CSCI_1112_Final/D&D%20Images/" + book + ".gif");
+		File f = new File("D&D Images/" + book + ".gif");
+		FileInputStream stream = new FileInputStream(f);
+		Cover = new Image(stream);
 		Explanation = new RandomAccessFile(book + ".txt", "rw");
 		Length = time;
 		Level = experiance;
