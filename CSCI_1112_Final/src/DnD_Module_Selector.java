@@ -1,14 +1,13 @@
 import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
-import javax.swing.JTextArea;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class DnD_Module_Selector extends Application{
@@ -56,21 +55,17 @@ public class DnD_Module_Selector extends Application{
 
 		Modules[18] = (new Module("Dragons of Stormwreck Isle", 1, 1));
 
-		Modules[19] = new Module("A Curriculum of Chaos", 4, 1);
-
-		for (int i = 0; i < Modules.length; i++) {
-			System.out.println(Modules[i].getName());
-		}
+		Modules[19] = (new Module("A Curriculum of Chaos", 4, 1));
 
 		return Modules;
 	}
 
 	public void start(Stage primaryStage) throws Exception {
-		Module toUser = new Module("Candlekeep Mysteries", 0, 0);
+		Module toUser = new Module("blank", 0, 0);
 
 		// Pane
 		Pane pane = new Pane();
-		Scene scene = new Scene(pane, 410, 380);
+		Scene scene = new Scene(pane, 400, 400);
 
 		// The Image
 		Image cover = toUser.getImage();
@@ -84,14 +79,13 @@ public class DnD_Module_Selector extends Application{
 		//The text File
 		RandomAccessFile file = toUser.getExplination();
 		String toLabel = "";
-		for (int i = 0; i < 30; i++) {
-			String newLine = file.readLine();
-			toLabel = toLabel + newLine + "\n";
-		}
-		Label Text = new Label(toLabel);
-		Text.setTranslateX(195);
-		Text.setTranslateY(40);
-		pane.getChildren().add(Text);
+		toLabel = toLabel + file.readLine() + "\n";
+		toLabel = toLabel + file.readLine();
+		Text text = new Text(toLabel);
+		text.setWrappingWidth(200);
+		text.setTranslateX(195);
+		text.setTranslateY(45);
+		pane.getChildren().add(text);
 
 		//Level combo box
 		ComboBox<String> level = new ComboBox<>();
@@ -124,7 +118,7 @@ public class DnD_Module_Selector extends Application{
 
 		go.setOnMouseClicked(e -> {
 			try {
-				Checkboxes(level, length,cover);
+				toUser = Checkboxes(level, length);
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -135,8 +129,10 @@ public class DnD_Module_Selector extends Application{
 		launch(args);
 	}
 
-	private static void Checkboxes(ComboBox<String> level, ComboBox<String> length, Image Cover) throws FileNotFoundException {
+	private static Module Checkboxes(ComboBox<String> level, ComboBox<String> length) throws FileNotFoundException {
 		Module[] Modules = makeModules();
+		Module UserChoice = new Module();
+		
 		int PlayerLevel = 0;
 		int PlayTime = 0;
 		if(level.getValue().contains("1")) {
@@ -169,8 +165,10 @@ public class DnD_Module_Selector extends Application{
 
 		for (int i = 0; i < Modules.length; i++) {
 			if(Modules[i].getLevel() == PlayerLevel && Modules[i].getLength() == PlayTime) {
-				Cover = Modules[i].getImage();
+				UserChoice = Modules[i];
 			}
 		}
+		
+		return UserChoice;
 	}
 }
