@@ -1,11 +1,6 @@
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.Scanner;
-
 import javax.swing.JTextArea;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,58 +18,59 @@ public class DnD_Module_Selector extends Application{
 		//https://www.thegamer.com/dungeons-dragons-5e-modules-best-ranked/#descent-into-avernus
 		Module[] Modules = new Module[20];
 
-		Modules[19] = (new Module("Curse of Strahd", 5, 4));
+		Modules[0] = (new Module("Curse of Strahd", 5, 4));
 
-		Modules[18] = (new Module("Tales from the Yawning Portal", 1, 4));
+		Modules[1] = (new Module("Tales from the Yawning Portal", 1, 4));
 
-		Modules[17] = (new Module("Keys from the Golden Valut", 4, 2));
+		Modules[2] = (new Module("Keys from the Golden Valut", 4, 2));
 
-		Modules[16] = (new Module("Tomb of Annihilation", 5, 2));
+		Modules[3] = (new Module("Tomb of Annihilation", 5, 2));
 
-		Modules[15] = (new Module("Lost Mines of Phandelver", 2, 1));
+		Modules[4] = (new Module("Lost Mines of Phandelver", 2, 1));
 
-		Modules[14] = (new Module("Out of the Abyss", 5, 1));
+		Modules[5] = (new Module("Out of the Abyss", 5, 1));
 
-		Modules[13] = (new Module("Descent Into Avernus", 4, 3));
+		Modules[6] = (new Module("Descent Into Avernus", 4, 3));
 
-		Modules[12] = (new Module("Ghosts of Saltmarsh", 3, 1));
+		Modules[7] = (new Module("Ghosts of Saltmarsh", 3, 1));
 
-		Modules[11] = (new Module("The Wild Beyond the Witchlight", 3, 4));
+		Modules[8] = (new Module("The Wild Beyond the Witchlight", 3, 4));
 
-		Modules[10] = (new Module("Rime of the Frostmaiden", 4 ,4));
+		Modules[9] = (new Module("Rime of the Frostmaiden", 4 ,4));
 
-		Modules[9] = (new Module("Dragon of Icepire Peak", 1, 2));
+		Modules[10] = (new Module("Dragon of Icepire Peak", 1, 2));
 
-		Modules[8] = (new Module("Shadow of the Dragon Queen", 5, 3));
+		Modules[11] = (new Module("Shadow of the Dragon Queen", 5, 3));
 
-		Modules[7] = (new Module("Dungeon of the Mad Mage", 2, 2));
+		Modules[12] = (new Module("Dungeon of the Mad Mage", 2, 2));
 
-		Modules[6] = (new Module("Princes of the Apocalypse", 2, 3));
+		Modules[13] = (new Module("Princes of the Apocalypse", 2, 3));
 
-		Modules[5] = (new Module("Dragon Heist", 2, 4));
+		Modules[14] = (new Module("Dragon Heist", 2, 4));
 
-		Modules[4] = (new Module("Storm King's Thunder", 3, 2));
+		Modules[15] = (new Module("Storm King's Thunder", 3, 2));
 
-		Modules[3] = (new Module("Call of the Netherdeep", 3, 3));
+		Modules[16] = (new Module("Call of the Netherdeep", 3, 3));
 
-		Modules[2] = (new Module("Candelkeep Mysteries", 1, 3));
+		Modules[17] = (new Module("Candelkeep Mysteries", 1, 3));
 
-		Modules[1] = (new Module("Dragons of Stormwreck Isle", 1, 1));
+		Modules[18] = (new Module("Dragons of Stormwreck Isle", 1, 1));
 
-		Modules[0] = new Module("A Curriculum of Chaos", 4, 1);
+		Modules[19] = new Module("A Curriculum of Chaos", 4, 1);
 
 		for (int i = 0; i < Modules.length; i++) {
 			System.out.println(Modules[i].getName());
 		}
+
 		return Modules;
 	}
 
 	public void start(Stage primaryStage) throws Exception {
-		Module toUser = new Module("Curse of Strahd", 0, 0);
+		Module toUser = new Module("Candlekeep Mysteries", 0, 0);
 
 		// Pane
 		Pane pane = new Pane();
-		Scene scene = new Scene(pane, 400, 300);
+		Scene scene = new Scene(pane, 410, 380);
 
 		// The Image
 		Image cover = toUser.getImage();
@@ -82,24 +78,19 @@ public class DnD_Module_Selector extends Application{
 		fullCover.setFitHeight(240);
 		fullCover.setFitWidth(175);
 		fullCover.setTranslateX(10);
-		fullCover.setTranslateY(40);
+		fullCover.setTranslateY(70);
 		pane.getChildren().add(fullCover);
 
 		//The text File
 		RandomAccessFile file = toUser.getExplination();
 		String toLabel = "";
-		toLabel = toLabel + file.readLine() + "\n";
-		toLabel = toLabel + file.readLine();
+		for (int i = 0; i < 30; i++) {
+			String newLine = file.readLine();
+			toLabel = toLabel + newLine + "\n";
+		}
 		Label Text = new Label(toLabel);
 		Text.setTranslateX(195);
 		Text.setTranslateY(40);
-
-		// JTextArea
-		JTextArea theLabel = new JTextArea();
-		theLabel.setText(toLabel);
-		theLabel.setLineWrap(true);
-		theLabel.setWrapStyleWord(true);
-		theLabel.setSize(175, 240);
 		pane.getChildren().add(Text);
 
 		//Level combo box
