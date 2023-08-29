@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.RandomAccessFile;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -11,9 +12,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class DnD_Module_Selector extends Application{
-
+	Module Printed;
 	private static Module[] makeModules() throws FileNotFoundException {
-		//Website used
+		
 		//https://www.thegamer.com/dungeons-dragons-5e-modules-best-ranked/#descent-into-avernus
 		Module[] Modules = new Module[20];
 
@@ -61,14 +62,14 @@ public class DnD_Module_Selector extends Application{
 	}
 
 	public void start(Stage primaryStage) throws Exception {
-		Module toUser = new Module("blank", 0, 0);
+		Printed = new Module("blank", 0, 0);
 
 		// Pane
 		Pane pane = new Pane();
 		Scene scene = new Scene(pane, 400, 400);
 
 		// The Image
-		Image cover = toUser.getImage();
+		Image cover = Printed.getImage();
 		ImageView fullCover = new ImageView(cover);
 		fullCover.setFitHeight(240);
 		fullCover.setFitWidth(175);
@@ -77,7 +78,7 @@ public class DnD_Module_Selector extends Application{
 		pane.getChildren().add(fullCover);
 
 		//The text File
-		RandomAccessFile file = toUser.getExplination();
+		RandomAccessFile file = Printed.getExplination();
 		String toLabel = "";
 		toLabel = toLabel + file.readLine() + "\n";
 		toLabel = toLabel + file.readLine();
@@ -118,8 +119,16 @@ public class DnD_Module_Selector extends Application{
 
 		go.setOnMouseClicked(e -> {
 			try {
-				toUser = Checkboxes(level, length);
-			} catch (FileNotFoundException e1) {
+				Printed = Checkboxes(level, length);
+				
+		        Image newCover = Printed.getImage();
+		        fullCover.setImage(newCover);
+
+		        String newToLabel = "";
+		        newToLabel = newToLabel + Printed.getExplination().readLine() + "\n";
+		        newToLabel = newToLabel + Printed.getExplination().readLine();
+		        text.setText(newToLabel);
+			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		});
@@ -168,7 +177,6 @@ public class DnD_Module_Selector extends Application{
 				UserChoice = Modules[i];
 			}
 		}
-		
 		return UserChoice;
 	}
 }
