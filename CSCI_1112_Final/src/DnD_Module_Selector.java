@@ -11,6 +11,7 @@ public class DnD_Module_Selector extends Application{
 
 	public static void main(String[] args) {
 		launch(args);
+		System.out.println("Running");
 	}
 	
 	@SuppressWarnings("unused")
